@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── TVASTRA Brand Colors ── */
+  --color-teal: #159F9B;
+  --color-teal-light: #1DBDB8;
+  --color-teal-deep: #128582;
+  --color-teal-muted: rgba(21,159,155,0.12);
+
+  --color-magenta: #D62D78;
+  --color-magenta-light: #E04D90;
+  --color-magenta-deep: #B82568;
+
+  --color-purple: #7A238C;
+  --color-purple-light: #9235A6;
+  --color-purple-deep: #631C72;
+
+  /* ── Card ── */
+  --color-card: #FCFAF5;
+  --color-card-foreground: #202321;
+  --color-muted-foreground: #6F716D;
+
+  /* ── Neutrals ── */
+  --color-ivory: #FAF8F3;
+  --color-cream: #F2EDE3;
+  --color-cream-warm: #EDE8DF;
+  --color-cream-dark: #E5DFD4;
+  --color-parchment: #EDE8DF;
+
+  --color-charcoal: #202321;
+  --color-charcoal-warm: #2C2E2C;
+  --color-muted: #6F716D;
+
+  /* ── Legacy aliases (keep for gradual migration) ── */
+  --color-espresso: #202321;
+  --color-espresso-light: #2C2E2C;
+  --color-espresso-medium: #3D4038;
+
+  --color-terracotta: #159F9B;
+  --color-terracotta-warm: #1DBDB8;
+  --color-terracotta-deep: #128582;
+  --color-terracotta-light: #A8E0DE;
+
+  --color-sage: #6F716D;
+  --color-sage-light: #8A8C88;
+  --color-sage-deep: #555754;
+
+  --color-sand: #E5E0D6;
+  --color-sand-light: #EDEAE3;
+  --color-sand-warm: #D4CEC2;
+
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-handwritten: 'Caveat', cursive;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::selection {
+    background-color: var(--color-teal);
+    color: white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--color-charcoal);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-ivory);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-sand);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .container-main {
+    max-width: 90rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-main {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container-main {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-main {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  .section-gap {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-gap {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-gap {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+}
