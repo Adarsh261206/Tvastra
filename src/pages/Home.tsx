@@ -3,6 +3,7 @@ import Hero from '../components/home/Hero';
 import HomeAbout from '../components/home/HomeAbout';
 import ClassesSection from '../components/home/ClassesSection';
 import TestimonialsSection from '../components/home/TestimonialsSection';
+import ClientsSection from '../components/home/ClientsSection';
 import FounderTeaser from '../components/home/FounderTeaser';
 import InstagramFeed from '../components/home/InstagramFeed';
 import FinalCTA from '../components/home/FinalCTA';
@@ -20,6 +21,7 @@ export default function Home() {
       <HomeAbout />
       <ClassesSection />
       <TestimonialsSection />
+      <ClientsSection />
       <FounderTeaser />
       <InstagramFeed />
       <FinalCTA />

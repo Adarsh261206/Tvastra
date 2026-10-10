@@ -19,7 +19,7 @@ export default function ProgramCard({ program, delay = 0 }: ProgramCardProps) {
       className="bg-ivory rounded-3xl overflow-hidden border border-sand/20"
     >
       <div className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${program.image})` }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url("${program.image}")` }} />
         <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 to-transparent" />
         <div className="absolute bottom-6 left-6 right-6">
           <span className="text-[10px] tracking-[0.2em] uppercase text-terracotta-light font-medium">{program.subtitle}</span>

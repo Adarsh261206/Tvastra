@@ -7,12 +7,13 @@ const categories = [
   {
     title: 'Kids Courses',
     age: 'Age 4 – 12 years',
-    count: '8 courses',
+    count: '7 courses',
     description: 'Age-appropriate courses for children.',
     link: '/courses/kids',
     tag: 'Kids',
     number: '01',
     accent: '#159F9B',
+    image: '/kidssections.png',
   },
   {
     title: 'Teens Courses',
@@ -23,16 +24,18 @@ const categories = [
     tag: 'Teens',
     number: '02',
     accent: '#D62D78',
+    image: '/teenssection.png',
   },
   {
     title: 'Adults Courses',
     age: '18 years +',
-    count: '42 courses',
+    count: '6 categories',
     description: 'Art forms and structured learning for adults.',
     link: '/courses/adults',
     tag: 'Adults',
     number: '03',
     accent: '#E2A91A',
+    image: '/adultssection.png',
   },
 ];
 
@@ -97,6 +100,11 @@ export default function ClassesPage() {
                 <span className="text-[#D62D78]">
                   Creative Space.
                 </span>
+                <br />
+
+                <span className="text-[#159F9B]">
+                  For Everyone.
+                </span>
 
               </h1>
 
@@ -151,7 +159,7 @@ export default function ClassesPage() {
 
             <div>
 
-              <div className="mb-5 flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
 
                 <span className="h-[2px] w-10 bg-[#159F9B]" />
 
@@ -160,14 +168,6 @@ export default function ClassesPage() {
                 </span>
 
               </div>
-
-              <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.85] tracking-[-0.055em] text-[#202321]">
-                Something for
-                <br />
-                <span className="text-[#159F9B]">
-                  Everyone.
-                </span>
-              </h2>
 
             </div>
 
@@ -205,7 +205,19 @@ export default function ClassesPage() {
                   {/* Visual */}
                   <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-[#FAF8F3]">
 
+                    {/* Course artwork image */}
+                    {cat.image && (
+                      <img
+                        src={cat.image}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
+
                     {/* Decorative composition */}
+                    {!cat.image && (
+                      <>
                     <div
                       className="absolute -right-12 -top-12 h-44 w-44 rounded-full opacity-20 transition-transform duration-700 group-hover:scale-125"
                       style={{
@@ -233,6 +245,8 @@ export default function ClassesPage() {
                       </span>
 
                     </div>
+                      </>
+                    )}
 
 
                     {/* Category tag */}
@@ -252,6 +266,7 @@ export default function ClassesPage() {
 
 
                     {/* Center */}
+                    {!cat.image && (
                     <div className="absolute inset-0 flex items-center justify-center">
 
                       <div
@@ -269,6 +284,7 @@ export default function ClassesPage() {
                       </div>
 
                     </div>
+                    )}
 
 
                     {/* Bottom accent */}

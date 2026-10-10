@@ -1,12 +1,5 @@
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-} from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { useRef } from 'react';
 
 const ctas = [
   { label: 'Enquire About Courses', link: '/contact' },
@@ -16,72 +9,8 @@ const ctas = [
 ];
 
 export default function FinalCTA() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  /* =========================================
-     SCROLL ANIMATION
-  ========================================= */
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 20,
-    mass: 0.8,
-  });
-
-  /* Heading movement */
-  const headingY = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [70, 0, -70]
-  );
-
-  const headingScale = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [0.88, 1, 0.88]
-  );
-
-  const headingRotate = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [-1.5, 0, 1.5]
-  );
-
-  /* Paragraph movement */
-  const paragraphY = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [45, 0, -45]
-  );
-
-  /* Buttons movement */
-  const buttonsY = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [55, 0, -55]
-  );
-
-  /* Decorative movement */
-  const decorationY = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [90, 0, -90]
-  );
-
-  const decorationRotate = useTransform(
-    progress,
-    [0, 0.5, 1],
-    [-8, 0, 8]
-  );
-
   return (
     <section
-      ref={sectionRef}
       className="
         relative
         overflow-x-clip
@@ -97,12 +26,7 @@ export default function FinalCTA() {
       }}
     >
 
-      {/* =========================================
-          SOFT BACKGROUND LAYER
-          Keeps artwork visible while improving
-          text readability.
-      ========================================= */}
-
+      {/* Soft background layer for text readability */}
       <div
         className="
           absolute
@@ -113,15 +37,8 @@ export default function FinalCTA() {
       />
 
 
-      {/* =========================================
-          DECORATIVE FLOATING ELEMENTS
-      ========================================= */}
-
-      <motion.div
-        style={{
-          y: decorationY,
-          rotate: decorationRotate,
-        }}
+      {/* Decorative floating elements (static) */}
+      <div
         className="
           absolute
           top-10
@@ -135,11 +52,7 @@ export default function FinalCTA() {
         "
       />
 
-      <motion.div
-        style={{
-          y: decorationY,
-          rotate: decorationRotate,
-        }}
+      <div
         className="
           absolute
           bottom-10
@@ -154,18 +67,12 @@ export default function FinalCTA() {
       />
 
 
-      {/* =========================================
-          MAIN CONTENT
-      ========================================= */}
-
+      {/* Main content */}
       <div className="container-main relative z-10">
 
         <div className="mx-auto max-w-6xl text-center">
 
-          {/* =====================================
-              CONTENT GLASS PANEL
-          ====================================== */}
-
+          {/* Content glass panel */}
           <div
             className="
               relative
@@ -186,7 +93,6 @@ export default function FinalCTA() {
           >
 
             {/* Pink glow */}
-
             <div
               className="
                 absolute
@@ -203,7 +109,6 @@ export default function FinalCTA() {
             />
 
             {/* Teal glow */}
-
             <div
               className="
                 absolute
@@ -219,16 +124,8 @@ export default function FinalCTA() {
             />
 
 
-            {/* =====================================
-                HEADING
-            ====================================== */}
-
-            <motion.h2
-              style={{
-                y: headingY,
-                scale: headingScale,
-                rotate: headingRotate,
-              }}
+            {/* Heading */}
+            <h2
               className="
                 relative
                 z-10
@@ -251,47 +148,26 @@ export default function FinalCTA() {
               <span className="text-[#D62D78]">
                 Beautiful Together.
               </span>
-            </motion.h2>
+            </h2>
 
 
-            {/* =====================================
-                SMALL DECORATIVE LINE
-            ====================================== */}
-
-            <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{
-                width: 70,
-                opacity: 1,
-              }}
-              viewport={{
-                once: false,
-                amount: 0.3,
-              }}
-              transition={{
-                duration: 0.8,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+            {/* Small decorative line */}
+            <div
               className="
                 relative
                 z-10
                 mx-auto
                 mt-7
                 h-[3px]
+                w-[70px]
                 rounded-full
                 bg-[#159F9B]
               "
             />
 
 
-            {/* =====================================
-                DESCRIPTION
-            ====================================== */}
-
-            <motion.p
-              style={{
-                y: paragraphY,
-              }}
+            {/* Description */}
+            <p
               className="
                 relative
                 z-10
@@ -307,17 +183,11 @@ export default function FinalCTA() {
             >
               Whether you want to learn art, plan a creative event, gift an
               art experience or join our team, connect with TVASTRA today.
-            </motion.p>
+            </p>
 
 
-            {/* =====================================
-                CTA BUTTONS
-            ====================================== */}
-
-            <motion.div
-              style={{
-                y: buttonsY,
-              }}
+            {/* CTA buttons */}
+            <div
               className="
                 relative
                 z-10
@@ -329,106 +199,77 @@ export default function FinalCTA() {
                 sm:gap-4
               "
             >
-              {ctas.map((cta, index) => (
-                <motion.div
+              {ctas.map((cta) => (
+                <Link
                   key={cta.label}
-                  initial={{
-                    opacity: 0,
-                    y: 30,
-                    scale: 0.9,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  viewport={{
-                    once: false,
-                    amount: 0.2,
-                  }}
-                  transition={{
-                    duration: 0.65,
-                    delay: index * 0.1,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
+                  to={cta.link}
+                  className="
+                    group
+                    relative
+                    inline-flex
+                    items-center
+                    gap-3
+                    overflow-hidden
+                    rounded-full
+                    border
+                    border-[#202321]/15
+                    bg-[#202321]
+                    px-6
+                    py-3.5
+                    text-[11px]
+                    font-bold
+                    uppercase
+                    tracking-[0.14em]
+                    text-white
+                    shadow-[0_10px_25px_rgba(32,35,33,0.12)]
+                    transition-all
+                    duration-500
+                    hover:-translate-y-1
+                    hover:bg-[#D62D78]
+                    hover:border-[#D62D78]
+                    hover:shadow-[0_15px_35px_rgba(214,45,120,0.25)]
+                    sm:px-7
+                    sm:text-[12px]
+                  "
                 >
-                  <Link
-                    to={cta.link}
+
+                  {/* Animated hover sweep */}
+                  <span
                     className="
-                      group
+                      absolute
+                      inset-0
+                      -translate-x-full
+                      bg-white/10
+                      transition-transform
+                      duration-500
+                      group-hover:translate-x-0
+                    "
+                  />
+
+                  <span className="relative z-10">
+                    {cta.label}
+                  </span>
+
+                  <ArrowUpRight
+                    className="
                       relative
-                      inline-flex
-                      items-center
-                      gap-3
-                      overflow-hidden
-                      rounded-full
-                      border
-                      border-[#202321]/15
-                      bg-[#202321]
-                      px-6
-                      py-3.5
-                      text-[11px]
-                      font-bold
-                      uppercase
-                      tracking-[0.14em]
-                      text-white
-                      shadow-[0_10px_25px_rgba(32,35,33,0.12)]
+                      z-10
+                      h-4
+                      w-4
                       transition-all
                       duration-500
-                      hover:-translate-y-1
-                      hover:bg-[#D62D78]
-                      hover:border-[#D62D78]
-                      hover:shadow-[0_15px_35px_rgba(214,45,120,0.25)]
-                      sm:px-7
-                      sm:text-[12px]
+                      group-hover:-translate-y-1
+                      group-hover:translate-x-1
                     "
-                  >
+                  />
 
-                    {/* Animated hover sweep */}
-
-                    <span
-                      className="
-                        absolute
-                        inset-0
-                        -translate-x-full
-                        bg-white/10
-                        transition-transform
-                        duration-500
-                        group-hover:translate-x-0
-                      "
-                    />
-
-                    <span className="relative z-10">
-                      {cta.label}
-                    </span>
-
-                    <ArrowUpRight
-                      className="
-                        relative
-                        z-10
-                        h-4
-                        w-4
-                        transition-all
-                        duration-500
-                        group-hover:-translate-y-1
-                        group-hover:translate-x-1
-                      "
-                    />
-
-                  </Link>
-                </motion.div>
+                </Link>
               ))}
-            </motion.div>
+            </div>
 
 
-            {/* =====================================
-                BOTTOM DECORATIVE ACCENT
-            ====================================== */}
-
-            <motion.div
-              style={{
-                y: decorationY,
-              }}
+            {/* Bottom decorative accent */}
+            <div
               className="
                 relative
                 z-10
@@ -443,7 +284,7 @@ export default function FinalCTA() {
               <span className="h-[3px] w-3 rounded-full bg-[#F5B82E]" />
               <span className="h-[3px] w-7 rounded-full bg-[#D62D78]" />
               <span className="h-[3px] w-3 rounded-full bg-[#159F9B]" />
-            </motion.div>
+            </div>
 
           </div>
         </div>

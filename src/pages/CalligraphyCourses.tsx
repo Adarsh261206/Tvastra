@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Search } from 'lucide-react';
 import { openWhatsApp } from '../lib/whatsapp';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
-const calligraphyCourses = [
-  { count: 1, name: 'Faux Calligraphy' },
-  { count: 2, name: 'Brushpen Calligraphy' },
-  { count: 3, name: 'Cut Nib Calligraphy' },
-  { count: 4, name: 'Copperplate Calligraphy' },
+const calligraphyCourses: { count: number; name: string; slug: string; image?: string }[] = [
+  { count: 1, name: 'Faux Calligraphy', slug: 'faux-calligraphy', image: '/Faux Calligraphy.png' },
+  { count: 2, name: 'Brushpen Calligraphy', slug: 'brushpen-calligraphy', image: '/Brush Pen Calligraphy.png' },
+  { count: 3, name: 'Cut Nib Calligraphy', slug: 'cut-nib-calligraphy', image: '/Cut Nib Calligraphy.png' },
+  { count: 4, name: 'Copperplate Calligraphy', slug: 'copperplate-calligraphy', image: '/Copperplate Calligraphy.png' },
 ];
 
 export default function CalligraphyCoursesPage() {
@@ -107,6 +108,44 @@ export default function CalligraphyCoursesPage() {
 
           </motion.div>
 
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          INTRO
+      ========================================================== */}
+      <section className="bg-[#FAF8F3]">
+        <div className="container-main py-12 md:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <div className="mb-5 flex items-center gap-4">
+              <span className="h-[2px] w-10 bg-[#D62D78]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.38em] text-[#D62D78]">
+                The Art Of Lettering
+              </span>
+            </div>
+            <div className="space-y-5 text-[15px] leading-[1.85] text-[#202321]/80">
+              <p>
+                Discover the art of beautiful handwriting with Calligraphy
+                Classes at Tvastra. Our step-by-step courses are designed to
+                help beginners as well as art enthusiasts understand letter
+                formation, strokes, spacing, composition and creative
+                lettering techniques.
+              </p>
+              <p>
+                Whether you want to learn calligraphy as a creative hobby,
+                improve your lettering skills, create handmade cards and
+                artworks, or explore professional calligraphy, our guided
+                sessions make learning enjoyable and practical.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -292,16 +331,40 @@ export default function CalligraphyCoursesPage() {
                   >
 
                     {/* Visual Area */}
-                    <div
+                    <Link
+                      to={`/courses/${course.slug}`}
+                      aria-label={course.name}
                       className="
                         relative
+                        block
                         aspect-[4/3]
                         overflow-hidden
                         bg-[#F2EDE2]
                       "
                     >
 
+                      {/* Course artwork image */}
+                      {course.image && (
+                        <img
+                          src={course.image}
+                          alt=""
+                          loading="lazy"
+                          className="
+                            absolute
+                            inset-0
+                            h-full
+                            w-full
+                            object-cover
+                            transition-transform
+                            duration-700
+                            group-hover:scale-105
+                          "
+                        />
+                      )}
+
                       {/* Top Right Shape */}
+                      {!course.image && (
+                        <>
                       <div
                         className="
                           absolute
@@ -354,6 +417,8 @@ export default function CalligraphyCoursesPage() {
                       >
                         {String(course.count).padStart(2, '0')}
                       </div>
+                        </>
+                      )}
 
 
                       {/* Category Pill */}
@@ -382,6 +447,7 @@ export default function CalligraphyCoursesPage() {
 
 
                       {/* Center Arrow */}
+                      {!course.image && (
                       <div className="absolute inset-0 flex items-center justify-center">
 
                         <div
@@ -418,6 +484,7 @@ export default function CalligraphyCoursesPage() {
                         </div>
 
                       </div>
+                      )}
 
 
                       {/* Bottom Accent */}
@@ -435,7 +502,7 @@ export default function CalligraphyCoursesPage() {
                         "
                       />
 
-                    </div>
+                    </Link>
 
 
                     {/* Card Content */}
@@ -443,6 +510,7 @@ export default function CalligraphyCoursesPage() {
 
                       <div className="mb-5 flex items-start justify-between gap-5">
 
+                        <Link to={`/courses/${course.slug}`} aria-label={course.name}>
                         <h3
                           className="
                             max-w-[280px]
@@ -458,6 +526,7 @@ export default function CalligraphyCoursesPage() {
                         >
                           {course.name}
                         </h3>
+                        </Link>
 
 
                         <span
@@ -603,6 +672,23 @@ export default function CalligraphyCoursesPage() {
 
         </div>
 
+      </section>
+
+
+      {/* =========================================================
+          CLOSING STRIP
+      ========================================================== */}
+      <section className="bg-[#202321]">
+        <div className="container-main py-10">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-display text-[1.5rem] leading-tight text-[#FAF8F3]">
+              Learn. Practice. Create beautiful lettering.
+            </p>
+            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#F5B82E]">
+              TVASTRA · Calligraphy
+            </span>
+          </div>
+        </div>
       </section>
     </>
   );

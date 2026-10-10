@@ -1,7 +1,13 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { openWhatsApp } from '../lib/whatsapp';
 import SEO from '../components/SEO';
+
+const cardImages = [
+  '/handwriring 1 (1).png',
+  '/handwriring 1 (2).png',
+];
 
 const learnings = [
   'Correct letter formation and writing patterns',
@@ -15,6 +21,13 @@ const learnings = [
 ];
 
 export default function HandwritingCoursesPage() {
+  const [imgIdx, setImgIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setImgIdx(i => (i + 1) % cardImages.length), 3000);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <>
       <SEO
@@ -78,12 +91,13 @@ export default function HandwritingCoursesPage() {
       {/* ABOUT + WHAT STUDENTS LEARN */}
       <section className="relative overflow-hidden bg-[#F7F3EA] py-16 md:py-24">
         <div className="container-main">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6 }}
-            className="mb-12 max-w-3xl"
+            className="max-w-3xl"
           >
             <div className="mb-5 flex items-center gap-4">
               <span className="h-[2px] w-10 bg-[#159F9B]" />
@@ -108,11 +122,41 @@ export default function HandwritingCoursesPage() {
             </div>
           </motion.div>
 
+          {/* Image slideshow card — both images cycle every 3s */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6 }}
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] border border-[#202321]/[0.07] bg-[#F2EDE2] shadow-[0_20px_60px_rgba(32,35,33,0.1)]">
+              {cardImages.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === imgIdx ? 'opacity-100' : 'opacity-0'}`}
+                />
+              ))}
+              <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+                {cardImages.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === imgIdx ? 'w-6 bg-white shadow' : 'w-2 bg-white/60'}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6 }}
+            className="mt-12"
           >
             <h2 className="font-display text-[clamp(2.2rem,4.5vw,3.6rem)] leading-[0.9] tracking-[-0.055em] text-[#202321]">
               What Students

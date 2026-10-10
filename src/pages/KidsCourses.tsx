@@ -2,36 +2,51 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Search } from 'lucide-react';
 import { openWhatsApp } from '../lib/whatsapp';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
-const kidsCourses: { count: number; name: string; extra?: string }[] = [
+const kidsCourses: { count: number; name: string; slug: string; extra?: string; image?: string }[] = [
   {
     count: 1,
     name: 'Kids Art Program - Beginners Level',
+    slug: 'kids-beginners',
+    image: '/Kids Art Program – Beginners Level 1 & 2.png',
   },
   {
     count: 2,
     name: 'Kids Art Program - Advance level',
+    slug: 'kids-advanced',
+    image: '/Kids Art Program – Advanced Level 1 & 2.png',
   },
   {
     count: 3,
     name: 'Kids Water Colors and Poster color Painting level',
+    slug: 'kids-watercolour-poster',
+    image: '/Kids Watercolour & Poster Colour Painting – Level 1 & 2.png',
   },
   {
     count: 4,
     name: 'Kids Canvas Painting - Material canvas book',
+    slug: 'kids-canvas',
+    image: '/Kids Canvas Painting Course.png',
   },
   {
     count: 5,
     name: 'Memory drawing - Human figures Level',
+    slug: 'kids-memory-drawing',
+    image: '/Memory Drawing – Human Figures Level 1 & 2.png',
   },
   {
     count: 6,
     name: 'Elementary exam preparation',
+    slug: 'elementary-exam-prep',
+    image: '/Elementary Drawing Grade Exam Preparation.png',
   },
   {
     count: 7,
     name: 'Intermediate exam preparation',
+    slug: 'intermediate-exam-prep',
+    image: '/Intermediate Drawing Grade Exam Preparation.png',
   },
 ];
 
@@ -127,6 +142,48 @@ export default function KidsCoursesPage() {
 
           </motion.div>
 
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          INTRO
+      ========================================================== */}
+      <section className="bg-[#FAF8F3]">
+        <div className="container-main py-12 md:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <div className="mb-5 flex items-center gap-4">
+              <span className="h-[2px] w-10 bg-[#159F9B]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.38em] text-[#159F9B]">
+                Why Start Early
+              </span>
+            </div>
+            <div className="space-y-5 text-[15px] leading-[1.85] text-[#202321]/80">
+              <p>
+                At Tvastra – Wings to Your Creativity, we believe every
+                child has the ability to create, imagine and express
+                themselves through art.
+              </p>
+              <p>
+                Our kids art classes in Thane West are designed for children
+                from 4 years onwards, with age-appropriate programs covering
+                drawing, colouring, painting, canvas art, watercolours,
+                poster colours and memory drawing.
+              </p>
+              <p>
+                Rather than simply asking children to copy a picture, our
+                courses focus on developing observation, imagination,
+                creativity, colour understanding, drawing skills and artistic
+                confidence through structured, step-by-step learning.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -309,9 +366,34 @@ export default function KidsCoursesPage() {
                   ">
 
                     {/* Visual Area */}
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#F2EDE2]">
+                    <Link
+                      to={`/courses/${course.slug}`}
+                      aria-label={course.name}
+                      className="relative block aspect-[4/3] overflow-hidden bg-[#F2EDE2]"
+                    >
+
+                      {/* Course artwork image */}
+                      {course.image && (
+                        <img
+                          src={course.image}
+                          alt=""
+                          loading="lazy"
+                          className="
+                            absolute
+                            inset-0
+                            h-full
+                            w-full
+                            object-cover
+                            transition-transform
+                            duration-700
+                            group-hover:scale-105
+                          "
+                        />
+                      )}
 
                       {/* Decorative artwork-inspired shapes */}
+                      {!course.image && (
+                        <>
                       <div
                         className="
                           absolute
@@ -358,6 +440,8 @@ export default function KidsCoursesPage() {
                       ">
                         {String(course.count).padStart(2, '0')}
                       </div>
+                        </>
+                      )}
 
 
                       {/* Kids tag */}
@@ -384,6 +468,7 @@ export default function KidsCoursesPage() {
 
 
                       {/* Center icon */}
+                      {!course.image && (
                       <div className="absolute inset-0 flex items-center justify-center">
 
                         <div className="
@@ -416,6 +501,7 @@ export default function KidsCoursesPage() {
                         </div>
 
                       </div>
+                      )}
 
 
                       {/* Bottom accent */}
@@ -431,7 +517,7 @@ export default function KidsCoursesPage() {
                         group-hover:w-full
                       " />
 
-                    </div>
+                    </Link>
 
 
                     {/* Course Content */}
@@ -439,6 +525,7 @@ export default function KidsCoursesPage() {
 
                       <div className="mb-5 flex items-start justify-between gap-5">
 
+                        <Link to={`/courses/${course.slug}`} aria-label={course.name}>
                         <h3 className="
                           max-w-[280px]
                           font-display
@@ -452,6 +539,7 @@ export default function KidsCoursesPage() {
                         ">
                           {course.name}
                         </h3>
+                        </Link>
 
                         <span className="
                           mt-1

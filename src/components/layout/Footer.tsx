@@ -57,12 +57,12 @@ const YouTubeIcon = () => (
 export default function Footer() {
   return (
     <footer className="bg-[#202321]">
-      <div className="container-main pt-20 pb-12">
+      <div className="container-main pt-10 pb-8 sm:pt-20 sm:pb-12">
 
         {/* Brand statement */}
-        <div className="mb-16">
+        <div className="mb-6 sm:mb-16">
           <h2
-            className="font-display text-[#FAF8F3] text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.15] tracking-tight max-w-2xl"
+            className="font-display text-[#FAF8F3] text-[1.65rem] sm:text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.2] sm:leading-[1.15] tracking-tight max-w-2xl"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             Give Your{' '}
@@ -72,14 +72,14 @@ export default function Footer() {
         </div>
 
         {/* 4-column grid */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 lg:gap-16 mb-14">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2 md:grid-cols-4 sm:gap-10 lg:gap-16 mb-8 sm:mb-14">
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="inline-block mb-5">
+            <Link to="/" className="inline-block mb-3 sm:mb-5">
               <TvasthraLogo
                 size={150}
-                className="opacity-90"
+                className="opacity-90 w-[96px] h-auto sm:w-[150px] sm:h-auto"
                 loading="lazy"
               />
             </Link>
@@ -95,16 +95,16 @@ export default function Footer() {
 
           {/* Navigate */}
           <div>
-            <h4 className="text-[9px] tracking-[0.3em] uppercase text-white mb-6">
+            <h4 className="text-[10px] sm:text-[9px] tracking-[0.3em] uppercase text-white mb-4 sm:mb-6">
               Navigate
             </h4>
 
-            <ul className="space-y-3">
+            <ul className="space-y-1 sm:space-y-3">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-[13px] text-white/70 hover:text-[#159F9B] transition-colors duration-300"
+                    className="inline-block py-1.5 text-[13px] text-white/70 hover:text-[#159F9B] transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -115,16 +115,16 @@ export default function Footer() {
 
           {/* Programs */}
           <div>
-            <h4 className="text-[9px] tracking-[0.3em] uppercase text-white mb-6">
+            <h4 className="text-[10px] sm:text-[9px] tracking-[0.3em] uppercase text-white mb-4 sm:mb-6">
               Programs
             </h4>
 
-            <ul className="space-y-3">
+            <ul className="space-y-1 sm:space-y-3">
               {programLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-[13px] text-white/70 hover:text-[#159F9B] transition-colors duration-300"
+                    className="inline-block py-1.5 text-[13px] text-white/70 hover:text-[#159F9B] transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -134,12 +134,12 @@ export default function Footer() {
           </div>
 
           {/* Studio info */}
-          <div className="col-span-1 sm:col-span-2 md:col-span-1">
-            <h4 className="text-[9px] tracking-[0.3em] uppercase text-white mb-6">
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="text-[10px] sm:text-[9px] tracking-[0.3em] uppercase text-white mb-4 sm:mb-6">
               Studio
             </h4>
 
-            <p className="text-[13px] text-white/70 leading-relaxed mb-4">
+            <p className="text-[13px] text-white/70 leading-relaxed mb-3 sm:mb-4">
               Vardhaman Vatika, A wing-104,
               <br />
               Opp. Kolshet Dmart, Kailash Nagar,
@@ -151,13 +151,13 @@ export default function Footer() {
               Mon – Sat
             </p>
 
-            <p className="text-[13px] text-white/70 leading-relaxed mb-6">
+            <p className="text-[13px] text-white/70 leading-relaxed mb-4 sm:mb-6">
               10:30 AM – 6:30 PM
             </p>
 
             <a
               href="tel:+918291418107"
-              className="inline-flex items-center gap-2 text-[13px] text-white/70 hover:text-[#159F9B] transition-colors duration-300 mb-6"
+              className="inline-flex items-center gap-2 py-1.5 text-[13px] text-white/70 hover:text-[#159F9B] transition-colors duration-300 mb-4 sm:mb-6"
             >
               <Phone
                 className="h-4 w-4"
@@ -253,7 +253,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom strip */}
-        <div className="border-t border-[#FAF8F3]/[0.06] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="border-t border-[#FAF8F3]/[0.06] pt-5 sm:pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
 
           <p className="text-[11px] text-white tracking-wide">
             &copy; 2026 TVASTRA Art Studio. All rights reserved.

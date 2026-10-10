@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const socialLinks = [
   {
     name: 'Google',
-    href: 'https://www.google.com',
+    href: 'https://www.google.com/search?q=TVASTRA+Art+Studio+Thane',
   },
   {
     name: 'YouTube',

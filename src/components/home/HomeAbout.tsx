@@ -30,23 +30,67 @@ export default function HomeAbout() {
   const [playing, setPlaying] = useState(false);
   const videoId = 'ceFs4Ik7oNY';
   const videoWrapRef = useRef<HTMLDivElement>(null);
+  const mobileVideoRef = useRef<HTMLDivElement>(null);
 
-  // Auto-pause: video screen se hat te hi stop, wapas Play dabane par chale
+  // Auto-pause: dono players screen se hat te hi stop, wapas Play dabane par chale
   useEffect(() => {
     if (!playing) return;
-    const el = videoWrapRef.current;
-    if (!el) return;
+    const els = [videoWrapRef.current, mobileVideoRef.current].filter(
+      (el): el is HTMLDivElement => el !== null
+    );
+    if (els.length === 0) return;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) setPlaying(false);
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) setPlaying(false);
       },
       { threshold: 0.2 }
     );
-    observer.observe(el);
+    els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [playing]);
   return (
     <section className="relative overflow-x-clip bg-[#F7F3EA] py-6 md:py-10 lg:py-14">
+
+      {/* MOBILE-ONLY VIDEO — portrait card, outside text card */}
+      <div ref={mobileVideoRef} className="mb-6 px-4 lg:hidden">
+        {!playing ? (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            aria-label="Play TVASTRA story video"
+            className="group relative block aspect-[3/4] w-full overflow-hidden rounded-3xl text-left shadow-[0_20px_60px_rgba(32,35,33,0.18)]"
+          >
+            <img
+              src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+              alt="Watch TVASTRA story video"
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+            <span className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#D62D78] text-white shadow-[0_12px_30px_rgba(214,45,120,0.4)] transition-transform duration-300 group-hover:scale-110">
+                <Play className="h-7 w-7 fill-current" />
+              </span>
+              <span className="rounded-full bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#202120]">
+                Watch Our Story
+              </span>
+            </span>
+          </button>
+        ) : (
+          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl bg-black shadow-[0_20px_60px_rgba(32,35,33,0.18)]">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+              title="TVASTRA story video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              className="absolute left-1/2 top-1/2 h-full w-[237%] -translate-x-1/2 -translate-y-1/2"
+            />
+          </div>
+        )}
+      </div>
+
       <motion.div ref={scrollRef} style={scrollStyle} className="mx-auto max-w-[1450px] px-6 md:px-10 lg:px-14">
 
         <Card className="relative grid overflow-hidden rounded-3xl border border-black/[0.07] bg-card shadow-sm lg:grid-cols-2">
@@ -58,14 +102,14 @@ export default function HomeAbout() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false, margin: '-100px', amount: 0.15 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden bg-black"
+            className="relative hidden overflow-hidden bg-black lg:block"
           >
             {!playing ? (
               <button
                 type="button"
                 onClick={() => setPlaying(true)}
                 aria-label="Play TVASTRA story video"
-                className="group relative block aspect-[4/3] h-full w-full text-left sm:aspect-[16/10] lg:aspect-auto lg:min-h-[580px]"
+                className="group relative mx-auto block aspect-[16/9] h-auto w-[323px] max-w-full overflow-hidden rounded-2xl text-left sm:mx-0 sm:aspect-[16/10] sm:w-full sm:h-full sm:rounded-none lg:aspect-auto lg:min-h-[580px]"
               >
                 <img
                   src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
@@ -75,17 +119,17 @@ export default function HomeAbout() {
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                <span className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-[#D62D78] text-white shadow-[0_12px_30px_rgba(214,45,120,0.4)] transition-transform duration-300 group-hover:scale-110">
-                    <Play className="h-8 w-8 fill-current" />
+                <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 sm:gap-4">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#D62D78] text-white shadow-[0_12px_30px_rgba(214,45,120,0.4)] transition-transform duration-300 group-hover:scale-110 sm:h-20 sm:w-20">
+                    <Play className="h-6 w-6 fill-current sm:h-8 sm:w-8" />
                   </span>
-                  <span className="rounded-full bg-white/90 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#202120]">
+                  <span className="rounded-full bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#202120] sm:px-5 sm:text-[11px]">
                     Watch Our Story
                   </span>
                 </span>
               </button>
             ) : (
-              <div className="relative aspect-[4/3] h-full w-full sm:aspect-[16/10] lg:aspect-auto lg:min-h-[580px]">
+              <div className="relative mx-auto aspect-[16/9] h-auto w-[323px] max-w-full overflow-hidden rounded-2xl sm:mx-0 sm:aspect-[16/10] sm:w-full sm:h-full sm:rounded-none lg:aspect-auto lg:min-h-[580px]">
                 <iframe
                   src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
                   title="TVASTRA story video"
@@ -110,6 +154,7 @@ export default function HomeAbout() {
             {/* Label */}
             <motion.p variants={item} className="text-xs font-bold tracking-[0.25em] text-[#159F9B]">
               ABOUT TVASTRA
+              <span className="ml-2 text-[#D62D78]">· SINCE 2020</span>
             </motion.p>
 
             {/* Handwritten quote */}

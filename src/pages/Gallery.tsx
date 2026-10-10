@@ -17,10 +17,10 @@ export default function GalleryPage() {
   return (
     <>
       <SEO
-        title="Student Art Gallery | TVASTRA Art Studio Thane"
-        description="Browse creative artwork by students of TVASTRA Art Studio. Drawings, paintings, calligraphy and more from our talented artists."
+        title="Art Gallery | TVASTRA Art Studio Thane"
+        description="Browse artwork by founder Suvija and students of TVASTRA Art Studio. Drawings, paintings, calligraphy and more."
         canonical="/gallery"
-        keywords="student art gallery, art exhibition Thane, student artwork, art gallery"
+        keywords="art gallery Thane, student artwork, founder artwork, art exhibition"
       />
       {/* Hero with background */}
       <section className="relative min-h-[42vh] flex items-end overflow-hidden sm:min-h-[50vh]">
@@ -45,11 +45,11 @@ export default function GalleryPage() {
     </div>
 
     <h1 className="font-display text-[2.9rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] text-[#202321] leading-[0.95] tracking-[-0.02em] sm:leading-[0.85] sm:tracking-[-0.04em] mb-3">
-      Made By Our Students.
+      Made By TVASTRA.
     </h1>
 
     <p className="text-black text-[14px] max-w-lg mx-auto leading-relaxed">
-      A digital exhibition of creative work from our talented students.
+      A digital exhibition of artwork by our founder Suvija and our talented students.
     </p>
   </div>
 </section>

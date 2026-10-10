@@ -1,25 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Search } from 'lucide-react';
 import { openWhatsApp } from '../lib/whatsapp';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
-const teensCourses = [
+function CourseImageSlideshow({ images }: { images: string[] }) {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), 2000);
+    return () => clearInterval(t);
+  }, [images.length]);
+
+  return (
+    <>
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          loading="lazy"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === idx ? 'opacity-100' : 'opacity-0'}`}
+        />
+      ))}
+    </>
+  );
+}
+
+const teensCourses: { count: number; name: string; slug: string; image?: string; images?: string[] }[] = [
   {
     count: 1,
     name: 'Pencil Shading and sketching for beginners',
+    slug: 'teens-pencil-shading',
+    image: '/Pencil Shading & Sketching for Beginners – Level 1 & 2.png',
   },
   {
     count: 2,
     name: 'Pencil Portrait and shading',
+    slug: 'teens-pencil-portrait',
+    image: '/Pencil Portrait and Shading.png',
   },
   {
     count: 3,
     name: 'Manga Sketching (Anime)',
+    slug: 'teens-manga',
+    image: '/Manga Sketching – Level 1 & 2.png',
   },
   {
     count: 4,
     name: 'Hyper realism - Charcoal painting',
+    slug: 'teens-charcoal',
+    images: [
+      '/Hyperrealism - Charcoal Painting.png',
+      '/Hyperrealism - Charcoal Painting (2).png',
+    ],
   },
 ];
 
@@ -301,9 +336,37 @@ export default function TeensCoursesPage() {
                   ">
 
                     {/* Visual Area */}
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#F2EDE2]">
+                    <Link
+                      to={`/courses/${course.slug}`}
+                      aria-label={course.name}
+                      className="relative block aspect-[4/3] overflow-hidden bg-[#F2EDE2]"
+                    >
+
+                      {/* Course artwork image */}
+                      {course.image && (
+                        <img
+                          src={course.image}
+                          alt=""
+                          loading="lazy"
+                          className="
+                            absolute
+                            inset-0
+                            h-full
+                            w-full
+                            object-cover
+                            transition-transform
+                            duration-700
+                            group-hover:scale-105
+                          "
+                        />
+                      )}
+
+                      {/* Multi-image slideshow */}
+                      {course.images && <CourseImageSlideshow images={course.images} />}
 
                       {/* Top-right decorative circle */}
+                      {!course.image && !course.images && (
+                        <>
                       <div
                         className="
                           absolute
@@ -354,6 +417,8 @@ export default function TeensCoursesPage() {
                       ">
                         {String(course.count).padStart(2, '0')}
                       </div>
+                        </>
+                      )}
 
 
                       {/* Teens Tag */}
@@ -380,6 +445,7 @@ export default function TeensCoursesPage() {
 
 
                       {/* Center Arrow */}
+                      {!course.image && !course.images && (
                       <div className="absolute inset-0 flex items-center justify-center">
 
                         <div className="
@@ -412,6 +478,7 @@ export default function TeensCoursesPage() {
                         </div>
 
                       </div>
+                      )}
 
 
                       {/* Bottom Accent */}
@@ -427,7 +494,7 @@ export default function TeensCoursesPage() {
                         group-hover:w-full
                       " />
 
-                    </div>
+                    </Link>
 
 
                     {/* Course Content */}
@@ -435,6 +502,7 @@ export default function TeensCoursesPage() {
 
                       <div className="mb-5 flex items-start justify-between gap-5">
 
+                        <Link to={`/courses/${course.slug}`} aria-label={course.name}>
                         <h3 className="
                           max-w-[280px]
                           font-display
@@ -448,6 +516,7 @@ export default function TeensCoursesPage() {
                         ">
                           {course.name}
                         </h3>
+                        </Link>
 
 
                         <span className="
@@ -584,6 +653,81 @@ export default function TeensCoursesPage() {
 
         </div>
 
+      </section>
+
+
+      {/* =========================================================
+          GROW WITH YOUR CHILD
+      ========================================================== */}
+      <section className="relative overflow-hidden bg-[#FAF8F3] py-16 md:py-24">
+        <div className="container-main">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <div className="mb-5 flex items-center gap-4">
+              <span className="h-[2px] w-10 bg-[#D62D78]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.38em] text-[#D62D78]">
+                Keep Growing
+              </span>
+            </div>
+            <h2 className="font-display text-[clamp(2.2rem,4.5vw,3.6rem)] leading-[0.9] tracking-[-0.055em] text-[#202321]">
+              Art Programs That
+              <br />
+              <span className="text-[#D62D78]">Grow With Your Child.</span>
+            </h2>
+            <p className="mt-6 text-[15px] leading-[1.85] text-[#202321]/80">
+              At Tvastra, students can progress from foundational drawing
+              into specialised art programs as their interests and abilities
+              develop — from pencil sketching and Manga to Drawing Grade
+              preparation and advanced art forms.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              {['Observation and drawing skills', 'Proportion and perspective', 'Shading and tonal understanding', 'Composition', 'Creative thinking', 'Independent artwork', 'Patience and concentration', 'Confidence in artistic expression'].map((focus) => (
+                <span
+                  key={focus}
+                  className="rounded-full border border-[#D62D78]/25 bg-white/60 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#D62D78]"
+                >
+                  {focus}
+                </span>
+              ))}
+            </div>
+            <p className="mt-8 text-[15px] leading-[1.85] text-[#202321]/80">
+              Looking for art classes for teens in Thane? Contact us to
+              understand which course and level would suit best — Tvastra,
+              Wings to Your Creativity, Vardhaman Vatika, Kolshet Road,
+              Thane West.
+            </p>
+            <button
+              type="button"
+              onClick={() => openWhatsApp('Teens art courses guidance')}
+              className="group mt-8 inline-flex min-h-[44px] items-center gap-3 rounded-full bg-[#D62D78] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.17em] text-white shadow-[0_12px_30px_rgba(214,45,120,0.22)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#B8256A]"
+            >
+              Ask Which Course Fits
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+
+      {/* =========================================================
+          CLOSING STRIP
+      ========================================================== */}
+      <section className="bg-[#202321]">
+        <div className="container-main py-10">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-display text-[1.5rem] leading-tight text-[#FAF8F3]">
+              From first sketch to confident creation.
+            </p>
+            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#F5B82E]">
+              TVASTRA · Teens
+            </span>
+          </div>
+        </div>
       </section>
     </>
   );

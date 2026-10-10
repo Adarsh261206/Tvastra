@@ -71,7 +71,7 @@ export default function Lightbox({ item, items, onClose, onPrev, onNext }: Light
             <div className="pt-5 flex items-start justify-between">
               <div>
                 <h3 className="font-display text-lg md:text-xl text-cream">{item.title}</h3>
-                <p className="text-[10px] tracking-[0.2em] uppercase text-cream/40 font-body mt-1">{item.category}</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-cream/40 font-body mt-1">{item.category?.replace(/-/g, ' ')}</p>
               </div>
               <p className="text-sm text-cream/40 max-w-sm text-right hidden md:block">{item.description}</p>
             </div>

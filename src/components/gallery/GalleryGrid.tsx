@@ -36,14 +36,16 @@ export default function GalleryGrid({ items, onImageClick }: GalleryGridProps) {
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-400">
                 <div className="space-y-1">
                   <p className="text-cream/50 text-[9px] tracking-[0.2em] uppercase font-body">
-                    Student Work
+                    {item.studentName === '[Student Name]' ? 'Student Work' : item.studentName}
                   </p>
                   <p className="text-cream/70 text-[10px] tracking-[0.15em] uppercase font-body">
-                    {item.category?.replace('-', ' ') ?? 'Artwork'}
+                    {item.category?.replace(/-/g, ' ') ?? 'Artwork'}
                   </p>
-                  <p className="text-cream/40 text-[9px] tracking-[0.15em] uppercase font-body">
-                    Age 14 · 2026
-                  </p>
+                  {item.studentName === '[Student Name]' && (
+                    <p className="text-cream/40 text-[9px] tracking-[0.15em] uppercase font-body">
+                      Age 14 · 2026
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
