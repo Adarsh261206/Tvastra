@@ -29,7 +29,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: 'Home', to: '/', icon: Home },
-  { label: 'About', to: '/about', icon: UserRound },
+  { label: 'About Us', to: '/about', icon: UserRound },
   {
     label: 'Courses',
     to: '/courses',

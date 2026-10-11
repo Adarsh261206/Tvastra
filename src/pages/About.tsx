@@ -179,6 +179,113 @@ export default function About() {
         </div>
       </section>
 
+      {/* THE PEOPLE BEHIND TVASTRA */}
+      <section className="section-gap bg-[#FAF8F3]">
+        <div className="container-main">
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
+
+            {/* TEXT */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="mb-6 flex items-center gap-4">
+                <span className="h-[2px] w-12 bg-[#159F9B]" />
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.42em] text-[#D62D78]">
+                  The People Behind Tvastra
+                </span>
+              </div>
+
+              <h2 className="max-w-2xl font-display text-[clamp(2.5rem,5vw,4.8rem)] leading-[0.86] tracking-[-0.055em] text-[#202321]">
+                One Vision. Many
+                <br />
+                Creative Hands.
+                <br />
+                <span className="italic text-[#D62D78]">
+                  One Beautiful Journey.
+                </span>
+              </h2>
+
+              <div className="my-8 h-[2px] w-16 bg-[#F5B82E]" />
+
+              <div className="space-y-6 text-[15px] leading-[1.85] text-[#202321]/85 md:text-[16px]">
+                <p>
+                  At Tvastra, we believe that creativity has the power to
+                  inspire, connect and transform lives. Behind every artwork,
+                  every workshop, every learning experience and every
+                  thoughtfully curated gift is a team driven by passion,
+                  dedication and a shared love for creativity.
+                </p>
+
+                <p>
+                  We are a team of creative minds who bring ideas to life,
+                  nurture artistic talent and create meaningful experiences
+                  for people of all ages. From inspiring individuals to
+                  explore their creativity to helping artists grow and
+                  crafting memorable gifts, we work together to make every
+                  Tvastra experience special.
+                </p>
+
+                <p>
+                  Led by our founder,{' '}
+                  <strong className="font-semibold text-[#202321]">
+                    Suvija Sreenivas
+                  </strong>
+                  , our journey is built on the belief that everyone has a
+                  creative spark waiting to be discovered.
+                </p>
+
+                <p>
+                  Together, we are building more than a brand. We are
+                  nurturing a community where creativity flourishes, artists
+                  find their wings, and meaningful connections are created
+                  through art.
+                </p>
+
+                <p className="font-semibold text-[#202321]">
+                  We are Tvastra — a team united by creativity, inspired by
+                  purpose, and committed to helping every creative spirit
+                  shine.
+                </p>
+              </div>
+
+              <p className="mt-8 font-handwritten text-[1.8rem] italic text-[#D62D78]">
+                Create. Learn. Gift. Grow together.
+              </p>
+            </motion.div>
+
+            {/* TEAM IMAGE */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="relative"
+            >
+              <div className="relative aspect-[3/2] overflow-hidden rounded-[28px] bg-[#F7F3EA]">
+                <img
+                  src="/founder team.jpeg"
+                  alt="The TVASTRA team led by founder Suvija Sreenivas"
+                  width={2560}
+                  height={1706}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+
+              <div className="absolute -bottom-6 -left-6 -z-10 h-32 w-32 rounded-[28px] bg-[#D62D78]/10" />
+
+              <div className="absolute -right-5 -top-5 -z-10 h-20 w-20 rounded-full bg-[#159F9B]/10" />
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
       {/* VISION & MISSION */}
       <section className="section-gap bg-[#F7F3EA]">
         <div className="container-main">
